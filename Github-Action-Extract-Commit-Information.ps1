@@ -9,9 +9,6 @@ if (!$Type) {
 if (!$Created) {
     throw "Must provide Created parameter"
 }
-if (![datetime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, $null)) {
-    throw "Invalid Created date format"
-}
 $GithubRef = $Env:GITHUB_REF
 $GithubRepository = $Env:GITHUB_REPOSITORY
 if (!$GithubRef) {
@@ -27,6 +24,10 @@ if ($Debug) {
     Write-Host Created=$Created
     Write-Host GithubRef=$GithubRef
     Write-Host GithubRepository=$GithubRepository
+}
+
+if (![datetime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, $null)) {
+    throw "Invalid Created date format"
 }
 
 if ($GithubRef.StartsWith("refs/tags/$Type/v")) {
