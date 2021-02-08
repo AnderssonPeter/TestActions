@@ -26,7 +26,8 @@ if ($Debug) {
     Write-Host GithubRepository=$GithubRepository
 }
 
-if (![datetime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, $null)) {
+$temp=[DateTime]::Today
+if (![DateTime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ', [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::None, [ref]$temp)) {
     throw "Invalid Created date format"
 }
 
