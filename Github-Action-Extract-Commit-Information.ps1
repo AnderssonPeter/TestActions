@@ -9,7 +9,7 @@ if (!$Type) {
 if (!$Created) {
     throw "Must provide Created parameter"
 }
-if (![datetime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ')) {
+if (![datetime]::TryParseExact($Created, 'yyyy-MM-ddTHH:mm:ssZ', $null)) {
     throw "Invalid Created date format"
 }
 $GithubRef = $Env:GITHUB_REF
