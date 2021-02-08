@@ -30,6 +30,11 @@ jobs:
         shell: pwsh
         run: ./Github-Action-Extract-Commit-Information.ps1 -EventName '${{ github.event_name }}' -Type 'application' -Created '${{github.event.release.created_at}}' -Debug $true
   
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0
+  
   build-client:
     if: startsWith(github.ref, 'refs/tags/client/v')
     
