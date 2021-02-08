@@ -25,7 +25,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Build API
+        run: echo Build API $GITHUB_REF
   
   build-client:
     if: startsWith(github.ref, 'refs/tags/client_v')
@@ -40,4 +40,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Build Client
+        run: echo Build Client $GITHUB_REF
