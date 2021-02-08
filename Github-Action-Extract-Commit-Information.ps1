@@ -35,14 +35,14 @@ if ($GithubRef.StartsWith("refs/tags/$Type/v")) {
     $Version = $GithubRef.Substring("refs/tags/$Type/v".Length)
 }
 else {
-    throw "Failed to extract version"
+    throw "Failed to extract version, expected GithubRef('$GithubRef') to match 'refs/tags/$Type/v' but it didn't"
 }
 
-if ($Version -notmatch '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(\.[0-9]{1,3})$') {
+if ($Version -notmatch '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$') {
     throw "Version must have format #.#.#.#"
 }
 
-TAGS="ghcr.io/${GithubRepository}:${VERSION}"
+$TAGS="ghcr.io/${GithubRepository}:${VERSION}"
 
 Write-Host ::set-output name=version::$Version
 Write-Host ::set-output name=type::$Type
